@@ -52,11 +52,17 @@ def parse_gcloud_config(raw: str) -> dict:
     #       from the "core" section. Return empty strings if raw is empty or a
     #       field is missing.
     import json
-    data = json.loads(raw) if isinstance(raw, str) else raw
-    account = data.get("core", {}).get("account")
-    project = data.get("core", {}).get("project")
-    return account, project
-    raise NotImplementedError("Phase 0: implement parse_gcloud_config()")
+    if not raw:
+        return {"account": "", "project": ""}
+    
+    try:
+        data = json.loads(raw) if isinstance(raw, str) else raw
+        core = data.get("core", {}) if isinstance(data, dict) else {}
+        account = core.get("account", "") or ""
+        project = core.get("project", "") or ""
+        return {"account": account, "project": project}
+    except Exception:
+        return {"account": "", "project": ""}
 
 
 def parse_repo_slug(remote_url: str) -> str:
@@ -74,28 +80,27 @@ def parse_repo_slug(remote_url: str) -> str:
     """
     # TODO: return "owner/repo" for both the HTTPS and SSH forms shown above.
     #       Strip any trailing ".git". Return "" if not a github.com URL.
-    if not remote_url:
-        return None
-    # Nettoie l'URL (gère les formats HTTPS, SSH, avec ou sans .git à la fin)
+    if not remote_url or not isinstance(remote_url, str):
+        return ""
+    
     url = remote_url.strip()
+    if not url or "github.com" not in url:
+        return ""
+
     if url.endswith(".git"):
         url = url[:-4]
     
     if "github.com/" in url:
-        parts = url.split("github.com/")
-        path = parts[-1]
+        path = url.split("github.com/")[-1]
     elif ":" in url and "@" in url:
-        # Format SSH (ex: git@github.com:owner/repo.git)
         path = url.split(":")[-1]
     else:
         path = url
         
-    # S'assure de ne garder que owner/repo
     segments = [s for s in path.split("/") if s]
     if len(segments) >= 2:
         return f"{segments[-2]}/{segments[-1]}"
-    return None
-    raise NotImplementedError("Phase 0: implement parse_repo_slug()")
+    return ""
 
 
 # --------------------------------------------------------------------------- #
