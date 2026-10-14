@@ -1,0 +1,24 @@
+{
+  "phase": "0",
+  "environment": {
+    "cloud_shell": true
+  },
+  "python": {
+    "version": "3.12.3",
+    "ok": true
+  },
+  "gcloud": {
+    "account": "angele.baderot-jacques@eurecom.fr",
+    "project": "project-id-511620",
+    "error": null
+  },
+  "docker": {
+    "version": "Docker version 29.8.2, build 7fc2dff",
+    "present": true
+  },
+  "git": {
+    "remote": "https://github.com/angelebaderotjacques-hash/clouds-lab-Ang-le-BADEROT-JACQUES.git",
+    "is_github": true,
+    "slug": "angelebaderotjacques-hash/clouds-lab-Ang-le-BADEROT-JACQUES"
+  }
+}
