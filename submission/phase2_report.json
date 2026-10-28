@@ -1,0 +1,30 @@
+{
+  "phase": "2",
+  "environment": {
+    "colab": true
+  },
+  "attention": {
+    "naive_ms": 229.946,
+    "vectorized_ms": 1.025,
+    "speedup": 224.34
+  },
+  "threads": {
+    "1": 2184.043,
+    "2": 2030.216,
+    "4": 2311.072,
+    "8": 2044.146
+  },
+  "devices": {
+    "cpu_ms": 400725.8,
+    "gpu_ms": 12513.8
+  },
+  "training": {
+    "steps": 2000,
+    "final_loss": 1.4759,
+    "param_count": 4935680
+  },
+  "sample": "\nTRANS:\n'Twere when I she\nTake nother. No\b throng know of the buine,\nor you hards the dash'd henced: you say Comey,\nCouch thyself pase.\n\nPROS:\nSir, fie, the would no'e heart ambly not be me\nready of na",
+  "model": {
+    "gcs_url": "https://storage.googleapis.com/project-id-511620-eurecomgpt/model.safetensors"
+  }
+}
